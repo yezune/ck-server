@@ -1,7 +1,8 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var index = require('./src/routes/index');
+
+var index = require('./src/index');
 
 var app = express();
 
@@ -24,5 +25,7 @@ if ('development' == app.get('env')) {
 app.get('/', index.index);
 
 http.createServer(app).listen(app.get('port'), function () {
+	console.log(' ');
+	console.log('');
 	console.log('Express server listening on port ' + app.get('port'));
 });
