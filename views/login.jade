@@ -1,0 +1,46 @@
+extends layout
+
+block scripts
+    script(src='/js/login.js')
+block contents
+    br 
+    br
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(align='center')
+                table(cellpadding='0', cellspacing='1', bgcolor='#777777', width='500')
+                    tr
+                        td(background='/img/menu_bg.gif', align='center', height='35' class='menutxt') 가맹점 로그인
+                    tr
+                        td(height='200', width='500', bgcolor='white', align='center')
+                            form#loginForm(method='POST') 
+                                table(cellpadding='0', cellspacing='0')
+                                    tr
+                                        td(align='right', class='tbold') ID
+                                        td(width='5')
+                                        td(width='200', height='31', background='/img/log_input.gif', align='center')
+                                            input(type='text', style="ime-mode:disabled;width:190px;border:0;", id='logid',  tabindex='1', value='#{logId}')
+                                        td(width='5')
+                                        td(rowspan='3') 
+                                            input(type='submit', value='', style="background:url('/img/login.gif'); width:96px; height:70px; border:0 ", tabindex='3')                                    
+                                    tr
+                                        td(height='8')
+                                    tr
+                                        td(align='right', class='tbold') Password
+                                        td(width='5')
+                                        td(width='200', height='31', background='/img/log_input.gif', align='center')
+                                            input(type='password', style="width:190px;border:0;", id='logpw', tabindex='2')
+                                        td(width='5')
+                                    tr
+                                        td(height='5')
+                                    tr
+                                        td(colspan='2')                                    
+                                        td(colspan='3', align='left')
+                                            input(type='checkbox', id='saveid', checked) 
+                                            font(color='#333333') 아이디 기억하기
+                                    tr
+                                        td(height='10')
+                                    tr
+                                        td(colspan='5', align='center', height='20')
+                                            div#information(align='center', style="color:red;")
+

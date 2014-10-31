@@ -1,0 +1,51 @@
+
+body {margin:0px;margin-top:10px;}
+body,a,div,p,input,textarea,table,td,select {font-family:tahoma; font-size:12px; color:black;line-height:140%;}
+a { text-decoration:none; }
+a:focus { outline:none;  text-decoration:none; }
+textarea:focus, input:focus{ outline: none; }
+
+.fixMenu {width:150px; min-width:150px; text-align:center; color:white; font-weight:bold; text-decoration:none;cursor: pointer;}
+.fixMenu:hover {background-image: url('/img/menu_hover.gif'); width:150px; min-width:150px; text-align:center; color:white; font-weight:bold; text-decoration:none;cursor: pointer;}
+.selMenu {background-image: url('/img/menu_on.gif'); width:150px; min-width:150px; text-align:center; color:white; font-weight:bold; text-decoration:none;}
+
+.bTitle {color:#B5384D; font-weight:bold; }
+.hyper {color:#AC0648; font-weight:bold; text-decoration:none; }
+.hyper:hover {color:#CC3366; font-weight:bold; text-decoration:underline; }
+.board_head {color:#666666; font-weight:bold; text-align:center; }
+
+.iLabel {background-color:#F8F1F8; text-align: right; width: 100px; min-width:100px; height:30px; color:#666666; font-weight:bold; padding-right:5px;}
+
+
+/* button */
+.greenBtn {
+	border: 1px solid;
+	border-radius: 4px;
+	cursor: pointer;
+    height: 24px;
+    min-width: 50px;
+	background-color: #388B61;
+	color: #ffffff;
+	border-color: #388B61 #388B61 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.greenBtn:hover {
+	background-color: #165A37;
+	color: #F6FF0B;
+}
+
+.orangeBtn {
+	border: 1px solid;
+	border-radius: 4px;
+	cursor: pointer;
+    height: 24px;
+    min-width: 50px;
+	background-color: #E1710D;
+	color: #ffffff;
+	border-color: #E1710D #E1710D #efefef;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.orangeBtn:hover {
+	background-color: #BE600C;
+	color: #F6FF0B;
+}

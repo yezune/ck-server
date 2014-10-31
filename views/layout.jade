@@ -1,11 +1,47 @@
 doctype html
 html
     head
-        meta(charset='utf-8', http-equiv='X-UA-Compatible', content='IE=edge')
-        title= '시켜시켜'
+        meta(charset="utf-8", http-equiv="X-UA-Compatible", content="IE=edge")
+        title='시켜시켜'
         link(rel='stylesheet', href='css/style.css')
         script(src='lib/jquery-1.10.2.min.js')
         block scripts
     body
-        div(style='margin-top:10px;')
-            block content
+        table(cellpadding='0', cellspacing='0', width='100%')
+            tr
+                td(align='left')
+                    | <a href='/' onFocus='blur()'><img src='/img/logo.png' border='0'></a>
+                td(align='right')
+                    if logInfo
+                        table
+                            tr
+                                td(style="color:#107175;font-weight:bold;") #{logInfo.shopName}
+                                td
+                                    input.greenBtn(type='button', value='Logout', onclick="window.location='/doLogout'")
+
+        table(cellpadding='0', cellspacing='0', width='100%', background='/img/menu_bg.gif')
+            tr(height='40')
+                if logInfo
+                    if logInfo.memLevel == 'Admin'
+                        td(class=menuId?'fixMenu':'selMenu', onclick="window.location='/'") 주문 리스트
+                        td(class=(menuId == 'local')?'selMenu':'fixMenu', onclick="window.location='/local'") 지역 관리
+                        td(class=(menuId == 'shop')?'selMenu':'fixMenu', onclick="window.location='/shop'") 가맹점 관리
+                        td(class=(menuId == 'deliver')?'selMenu':'fixMenu', onclick="window.location='/deliver'") 배달맨 관리
+                        td(class=(menuId == 'menu')?'selMenu':'fixMenu', onclick="window.location='/menu'") 메뉴 관리
+                    else
+                        td(class=menuId?'fixMenu':'selMenu', onclick="window.location='/'") 주문 리스트
+                        td(class=(menuId == 'shopInfo')?'selMenu':'fixMenu', onclick="window.location='/shopInfo'") 가맹점 정보
+                        td(class=(menuId == 'menu')?'selMenu':'fixMenu', onclick="window.location='/menu'") 메뉴 관리
+                    td(style="color:#284528; align:right") .
+
+        div(style="margin-top:10px;margin-left:10px;")
+            block contents
+
+        table(cellpadding='0', cellspacing='0', width='100%')
+            tr
+                td(height='30')
+            tr
+                td(height='1', bgcolor='#dddddd')
+            tr
+                td(style="color:#777777; text-align:center;") Copyright © 2014 Actus. right reserved.
+                                    

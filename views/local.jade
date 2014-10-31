@@ -1,0 +1,84 @@
+extends layout
+
+block scripts
+    script(src='/js/register.js')
+block contents
+    table(cellpadding='0', cellspacing='0')
+        tr
+            td(valign='top')
+                table(cellpadding='0', cellspacing='0', style="margin:15px;")
+                    tr
+                        td
+                            table(cellpadding='0', cellspacing='0')
+                                tr 
+                                    td.bTitle(height='30', align='left') 
+                                        | <img src='/img/title_blit.gif' > 지역관리
+                                        
+                            table(cellpadding='0', cellspacing='0')
+                                tr
+                                    td(align='left')
+                                        form(method='post', id='localForm', name='localForm')
+                                            input(type='hidden', name='localID', value='0')
+                                            table(cellpadding='0', cellspacing='0')
+                                                tr 
+                                                    td(height='1', bgcolor='B5384D', colspan='11')
+                                                tr
+                                                    td.iLabel 지역명
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                    td(style="align:left; padding-left:5px;")
+                                                        input(type='text', style="width:200px;border:0;", name='localName')
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                    td(width='1', bgcolor='FFFFFF')
+                                                    td.iLabel Description
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                    td(style="align:left; padding-left:5px;")
+                                                        input(type='text', style="width:300px;border:0;", name='localDesc')
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                tr 
+                                                    td(height='1', bgcolor='B5384D', colspan='9')
+                                                tr(height='40')
+                                                    td(colspan='2')
+                                                    td(colspan='7', align='left')
+                                                        input.greenBtn(type='button', id='localSubmit', value='Add Local', onclick="submitLocal()")
+                                                                        
+                                                tr 
+                                                    td(height='20')
+                                    
+                            table(cellpadding='0', cellspacing='0', width='100%')
+                                tr 
+                                    td(height='1', bgcolor='B5384D', colspan='16', align='left')
+                                tr(height='30', bgcolor='F8F1F8')
+                                    td(width='50', class='board_head') No.
+                                    td(width='1', bgcolor='D7D8DD')
+                                    td(width='1', bgcolor='FFFFFF')
+                                    td(width='150', class='board_head') 지역명
+                                    td(width='1', bgcolor='D7D8DD')
+                                    td(width='1', bgcolor='FFFFFF')
+                                    td(width='300', class='board_head') Description
+                                    td(width='1', bgcolor='D7D8DD')
+                                    td(width='1', bgcolor='FFFFFF')
+                                    td(width='80', class='board_head') Shop Count
+
+                                if qResult.length > 0
+                                    - var numIndex = qResult.length;
+                                    each result in qResult  
+                                        tr 
+                                            td(height='1', bgcolor='D7D8DD', colspan='10')
+                                        tr(height='30')
+                                            td.board_head #{numIndex}
+                                            td(colspan='2')
+                                            td(align='center')
+                                                a.hyper(href='#', onclick="selLocal(#{result.localID}, '#{result.localName}', '#{result.Descript}');") #{result.localName}
+                                            td(colspan='2')
+                                            td #{result.Descript}
+                                            td(colspan='2')
+                                            td(align='center') #{result.shopCount}
+                                        - numIndex = numIndex - 1;
+                                else
+                                    tr 
+                                        td(height='1', bgcolor='D7D8DD', colspan='10')
+                                    tr
+                                        td(height='30', colspan='10', align='center') Nothing Local. Click the [Add Local] button to create new Local.
+                                tr 
+                                    td(height='1', bgcolor='B5384D', colspan='10')
+        
