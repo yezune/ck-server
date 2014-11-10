@@ -1,0 +1,63 @@
+extends layout
+
+block scripts
+    script(src='/js/menu.js')
+block contents
+    table(cellpadding='0', cellspacing='0', style="width:100%;")
+        tr
+            td.bTitle(align='left', width='50%')
+                | <img src='/img/title_blit.gif' > #{shopName} 메뉴
+            td(height='40', align='right', width='50%')
+                 input.greenBtn(type='button', value='Add Menu', onclick="loadMenuForm(#{shopID}, '#{shopName}');")
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr(height='30', bgcolor='F8F1F8')
+            td(width='40', class='board_head') No.
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='150', class='board_head') 메뉴이름
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='140', class='board_head') 가격
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(class='board_head') 이미지
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(class='board_head') 설명글
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='100', class='board_head') Delete
+
+        - var listIndex = 0;
+        - var boxIndex = 0;
+        if menuList.length > 0
+            - var listNum = menuList.length;
+            each result in menuList
+                - var bgcolor = '#F2F8F9';
+                - if ((listIndex%2) == 0) bgcolor='#FFFFFF';
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='16')
+                tr(height='40', bgcolor='#{bgcolor}')
+                    td(align='center') #{listNum}
+                    td(colspan='2')
+                    td(align='center')
+                        | <a href='#' class='hyper' onclick="menuInfo(#{shopID}, '#{shopName}', #{result.menuID});"> #{result.menuName} </a>
+                    td(colspan='2')
+                    td(align='center') #{result.price}
+                    td(colspan='2')
+                    td(align='center') 
+                        img(src='#{result.menuImage}', border=0, height='40')                            
+                    td(colspan='2')
+                    td #{result.Descript}
+                    td(colspan='2')
+                    td(align='center')
+                        input.orangeBtn(type='button', value='Delete', onclick="delMenu(#{shopID}, '#{shopName}', #{result.menuID});")
+                - listIndex = listIndex + 1;
+                - listNum = listNum - 1;
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+

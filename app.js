@@ -2,7 +2,8 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var io = require('socket.io');
-
+global.uploadDir = "/img/up";
+global.uploadPath = __dirname+'/public'+global.uploadDir;
 
 var app = express();
 
@@ -13,11 +14,13 @@ app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.multipart());
 app.use(express.cookieParser());
 app.use(express.cookieSession({ path: '/', httpOnly: false, secret: 'secret', cookie: { maxAge: null }}));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -25,20 +28,45 @@ if ('development' == app.get('env')) {
 }
 
 var action = require('./src/action');
+var restAPI = require('./src/restapi');
 
 app.get('/', action.orderList);
 app.post('/', action.orderList);
 app.post('/doLogin', action.doLogin);
-app.get('/doLogout', action.doLogout);
+app.post('/doLogout', action.doLogout);
 
 // local
 app.get('/local', action.local);
 app.post('/addLocal', action.addLocal);
 app.post('/editLocal', action.editLocal);
 
-//shop
-app.get('/shop', action.shop);
+// shop
 app.post('/shop', action.shop);
+app.post('/shopForm', action.shopForm);
+app.post('/shopInfo', action.shopInfo);
+app.post('/delShop', action.delShop);
+
+app.get('/shopCate', action.shopCate);
+app.post('/addCate', action.addCate);
+app.post('/editCate', action.editCate);
+app.post('/delCate', action.delCate);
+
+app.post('/registShop', action.registShop);
+
+
+// menu
+app.post('/menu', action.menu);
+app.post('/menuForm', action.menuForm);
+app.post('/menuInfo', action.menuInfo);
+app.post('/delMenu', action.delMenu);
+
+app.post('/registMenu', action.registMenu);
+
+
+// REST API
+app.get('/api/localList', restAPI.localList);
+app.post('/api/localList', restAPI.localList);
+
 
 
 

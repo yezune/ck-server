@@ -1,0 +1,83 @@
+extends layout
+
+block scripts
+    script(src='/js/shop.js')
+block contents
+    table(cellpadding='0', cellspacing='0', style="width:100%;")
+        tr
+            td(align='left', width='50%')
+                input.greenBtn(type='button', value='Add Shop', onclick="post_to_url('/shopForm');")
+                                        
+            td(height='40', align='right', width='50%')
+                 table(cellpadding='0', cellspacing='0')
+                    tr
+                        td Local :&nbsp;
+                        td
+                            select(name='localID', onchange="changeLocal(this.value)")
+                                each local in localList 
+                                    if local.localID == localID
+                                        option(value='#{local.localID}', selected) #{local.localName}
+                                    else
+                                        option(value='#{local.localID}') #{local.localName}
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+    table(cellpadding='0', cellspacing='0', width='100%', style='table-layout: fixed;')
+        tr(height='30', bgcolor='F8F1F8')
+            td(width='40', class='board_head') No.
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='140', class='board_head') Shop Name
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='140', class='board_head') 전화번호
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(class='board_head') 주소
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='80', class='board_head') Menu Count
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='100', class='board_head') 메뉴관리
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='100', class='board_head') Delete
+
+        - var listIndex = 0;
+        - var boxIndex = 0;
+        if shopList.length > 0
+            - var listNum = shopList.length;
+            each result in shopList
+                - var bgcolor = '#F2F8F9';
+                - if ((listIndex%2) == 0) bgcolor='#FFFFFF';
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='19')
+                tr(height='40', bgcolor='#{bgcolor}')
+                    td(align='center') #{listNum}
+                    td(colspan='2')
+                    td(align='center')
+                        | <a href='#' class='hyper' onclick="shopInfo('#{result.shopID}');"> #{result.shopName} </a>
+                    td(colspan='2')
+                    td(align='center')
+                        if result.telNumber
+                            | #{result.telNumber}
+                        if result.mobile
+                            | <br>#{result.mobile}
+                            
+                    td(colspan='2')
+                    td #{result.address1} #{result.address2}
+                    td(colspan='2')
+                    td(align='center') #{result.menuCnt}
+                    td(colspan='2')
+                    td(align='center')
+                        input.greenBtn(type='button', value='메뉴관리', onclick="manageMenu(#{result.shopID}, '#{result.shopName}');")
+                    td(colspan='2')
+                    td(align='center')
+                        input.orangeBtn(type='button', value='Delete', onclick="delShop(#{result.shopID});")
+                - listIndex = listIndex + 1;
+                - listNum = listNum - 1;
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+

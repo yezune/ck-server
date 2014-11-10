@@ -1,0 +1,71 @@
+extends layout
+
+block scripts
+    script(src='/js/shop.js')
+block contents
+    table(cellpadding='0', cellspacing='0')
+        tr
+            td(valign='top')
+                table(cellpadding='0', cellspacing='0', style="margin:15px;")
+                    tr
+                        td
+                            table(cellpadding='0', cellspacing='0')
+                                tr 
+                                    td.bTitle(height='30', align='left') 
+                                        | <img src='/img/title_blit.gif' > Shop Category
+                                        
+                            form(method='post', id='cateForm', name='cateForm')
+                                input(type='hidden', name='shopCate', value='0')
+                                table(cellpadding='0', cellspacing='0')
+                                    tr
+                                        td(align='left')
+                                            table(cellpadding='0', cellspacing='0')
+                                                tr 
+                                                    td(height='1', bgcolor='B5384D', colspan='5')
+                                                tr
+                                                    td.iLabel Category Name
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                    td(style="align:left; padding-left:5px;")
+                                                        input(type='text', style="width:200px;border:0;", name='cateName')
+                                                    td(width='1', bgcolor='D7D8DD')
+                                                    td(style="align:left; padding-left:5px;")
+                                                        input.greenBtn(type='button', id='cateSubmit', value='Add', onclick="submitCate()")
+                                                tr 
+                                                    td(height='1', bgcolor='B5384D', colspan='5')
+                                                tr 
+                                                    td(height='20')
+                                    
+                            table(cellpadding='0', cellspacing='0', width='100%')
+                                tr 
+                                    td(height='1', bgcolor='B5384D', colspan='7', align='left')
+                                tr(height='30', bgcolor='F8F1F8')
+                                    td(width='50', class='board_head') No.
+                                    td(width='1', bgcolor='D7D8DD')
+                                    td(width='1', bgcolor='FFFFFF')
+                                    td(width='200', class='board_head') Category Name
+                                    td(width='1', bgcolor='D7D8DD')
+                                    td(width='1', bgcolor='FFFFFF')
+                                    td(width='120', class='board_head') Delete
+
+                                if qResult.length > 0
+                                    - var numIndex = qResult.length;
+                                    each result in qResult  
+                                        tr 
+                                            td(height='1', bgcolor='D7D8DD', colspan='7')
+                                        tr(height='30')
+                                            td.board_head #{numIndex}
+                                            td(colspan='2')
+                                            td(align='center')
+                                                a.hyper(href='#', onclick="selCate(#{result.shopCate}, '#{result.cateName}');") #{result.cateName}
+                                            td(colspan='2')
+                                            td(align='center') 
+                                                input.orangeBtn(type='button', value='Delete', onclick="delCate(#{result.shopCate})")
+                                        - numIndex = numIndex - 1;
+                                else
+                                    tr 
+                                        td(height='1', bgcolor='D7D8DD', colspan='7')
+                                    tr
+                                        td(height='30', colspan='7', align='center') Nothing Category. Click the [Add] button to create new Category.
+                                tr 
+                                    td(height='1', bgcolor='B5384D', colspan='7')
+        

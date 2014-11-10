@@ -1,0 +1,73 @@
+extends layout
+
+block scripts
+    script(src='/js/menu.js')
+
+block contents
+    form(action='/registMenu', method='post', enctype='multipart/form-data')
+        input(type='hidden', name='shopID', value='#{menuInfo.shopID}')
+        input(type='hidden', name='menuID', value='#{menuInfo.menuID}')
+        table(cellpadding='0', cellspacing='0')
+            tr
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr
+                td.iLabel 메뉴 이름
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='menuName', value='#{menuInfo.menuName}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel 가격
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='price', value='#{menuInfo.price}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            if logInfo.memLevel == 'Admin'
+                tr 
+                    td.iLabel 할인정책
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', colspan='7')
+                        input(type='text', style="width:400px;border:0;", name='eventFunc', value='#{menuInfo.eventFunc}')
+                    td(width='1', bgcolor='D7D8DD')
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='11')
+                
+            tr 
+                td.iLabel 메뉴 설명
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='text', style="width:400px;border:0;", name='Descript', value='#{menuInfo.Descript}')
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            if menuInfo.menuImage
+                tr 
+                    td.iLabel 등록된 이미지
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', colspan='7')
+                        img(src="#{menuInfo.menuImage}", border=0)
+                    td(width='1', bgcolor='D7D8DD')
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr 
+                td.iLabel 메뉴 이미지
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='file' name='upfile', style="width:500px;")
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr(height='40')
+                td(colspan='11', align='center')
+                    input.greenBtn(type='submit', value='#{btnText}')
+
+                                
+

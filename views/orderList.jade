@@ -1,0 +1,86 @@
+extends layout
+
+block scripts
+    script(src='/js/order.js')
+block contents
+    table(cellpadding='0', cellspacing='0', style="width:100%;")
+        tr
+            td(height='40', align='right')
+                 table(cellpadding='0', cellspacing='0')
+                    tr
+                        td 주문타입 :&nbsp;
+                        td
+                            select(name='orderType', onchange="changeType(this.value)")
+                                option(value='0') 전체
+                                option(value='1') 주문진행
+                                option(value='2') 배달중
+                                option(value='3') 결제완료
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+    table(cellpadding='0', cellspacing='0', width='100%', style='table-layout: fixed;')
+        tr(height='30', bgcolor='F8F1F8')
+            td(width='40', class='board_head') No.
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='140', class='board_head') Shop Name
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='100', class='board_head') 주문자
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='200', class='board_head') 주문메뉴
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(class='board_head') 배달지
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='80', class='board_head') 주문금액
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='80', class='board_head') 결제금액
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='80', class='board_head') 수수료
+            td(width='1', bgcolor='D7D8DD')
+            td(width='1', bgcolor='FFFFFF')
+            td(width='100', class='board_head') Action
+
+        - var listIndex = 0;
+        - var boxIndex = 0;
+        if orderList.length > 0
+            - var listNum = orderList.length;
+            each result in orderList
+                - var bgcolor = '#F2F8F9';
+                - if ((listIndex%2) == 0) bgcolor='#FFFFFF';
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='25')
+                tr(height='40', bgcolor='#{bgcolor}')
+                    td(align='center') #{listNum}
+                    td(colspan='2')
+                    td(align='center')
+                        | <a href='#' class='hyper' onclick="shopInfo(#{result.shopID});"> #{result.shopName} </a>
+                    td(colspan='2')
+                    td(align='center') #{result.memName}
+                    td(colspan='2')
+                    td
+                        - var orderArray = result.orderMenu.split(',');
+                        each order in orderArray
+                            | #{order} <br>
+                    td(colspan='2')
+                    td #{result.address}
+                    td(colspan='2')
+                    td(align='center') #{result.orderPrice}
+                    td(colspan='2')
+                    td(align='center') #{result.payPrice}
+                    td(colspan='2')
+                    td(align='center') #{result.systemFee}
+                    td(colspan='2')
+                    td(align='center')
+                        input.orangeBtn(type='button', value='Action', onclick="")
+                - listIndex = listIndex + 1;
+                - listNum = listNum - 1;
+    table(cellpadding='0', cellspacing='0', width='100%')
+        tr
+            td(height='1', bgcolor='B5384D', width='100%')
+

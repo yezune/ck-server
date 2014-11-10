@@ -1,8 +1,4 @@
 
-function myTrim(x) {
-    return x.replace(/^\s+|\s+$/gm,'');
-}
-
 $(document).ready( function(){
 
 	$("#loginForm").submit(function(event) {

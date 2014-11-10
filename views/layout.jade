@@ -3,8 +3,9 @@ html
     head
         meta(charset="utf-8", http-equiv="X-UA-Compatible", content="IE=edge")
         title='시켜시켜'
-        link(rel='stylesheet', href='css/style.css')
-        script(src='lib/jquery-1.10.2.min.js')
+        link(rel='stylesheet', href='/css/style.css')
+        script(src='/lib/jquery-1.10.2.min.js')
+        script(src='/js/util.js')
         block scripts
     body
         table(cellpadding='0', cellspacing='0', width='100%')
@@ -17,7 +18,7 @@ html
                             tr
                                 td(style="color:#107175;font-weight:bold;") #{logInfo.shopName}
                                 td
-                                    input.greenBtn(type='button', value='Logout', onclick="window.location='/doLogout'")
+                                    input.greenBtn(type='button', value='Logout', onclick="post_to_url('/doLogout');")
 
         table(cellpadding='0', cellspacing='0', width='100%', background='/img/menu_bg.gif')
             tr(height='40')
@@ -25,16 +26,15 @@ html
                     if logInfo.memLevel == 'Admin'
                         td(class=menuId?'fixMenu':'selMenu', onclick="window.location='/'") 주문 리스트
                         td(class=(menuId == 'local')?'selMenu':'fixMenu', onclick="window.location='/local'") 지역 관리
-                        td(class=(menuId == 'shop')?'selMenu':'fixMenu', onclick="window.location='/shop'") 가맹점 관리
-                        td(class=(menuId == 'deliver')?'selMenu':'fixMenu', onclick="window.location='/deliver'") 배달맨 관리
-                        td(class=(menuId == 'menu')?'selMenu':'fixMenu', onclick="window.location='/menu'") 메뉴 관리
+                        td(class=(menuId == 'shop')?'selMenu':'fixMenu', onclick="post_to_url('/shop');") 가맹점/메뉴 관리
+                        td(class=(menuId == 'shopCate')?'selMenu':'fixMenu', onclick="window.location='/shopCate'") 상점 카테고리
                     else
                         td(class=menuId?'fixMenu':'selMenu', onclick="window.location='/'") 주문 리스트
-                        td(class=(menuId == 'shopInfo')?'selMenu':'fixMenu', onclick="window.location='/shopInfo'") 가맹점 정보
-                        td(class=(menuId == 'menu')?'selMenu':'fixMenu', onclick="window.location='/menu'") 메뉴 관리
+                        td(class=(menuId == 'shopInfo')?'selMenu':'fixMenu', onclick="post_to_url('/shopInfo');") 가맹점 정보
+                        td(class=(menuId == 'menu')?'selMenu':'fixMenu', onclick="post_to_url('/menu');") 메뉴 관리
                     td(style="color:#284528; align:right") .
 
-        div(style="margin-top:10px;margin-left:10px;")
+        div(style="margin-top:10px;margin-left:10px;margin-right:10px;")
             block contents
 
         table(cellpadding='0', cellspacing='0', width='100%')

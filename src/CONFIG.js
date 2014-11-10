@@ -11,4 +11,12 @@ MYSQL_PASS          = 'mysql!@#';
 MYSQL_DATABASE      = 'LVOS';
 
 
+/* const value */
+LIST_COUNT = 20;
 
+ORDER_START   = 0;
+ORDER_ACCEPT  = 1;
+ORDER_COOKING = 2;
+ORDER_DELIVER = 5;
+ORDER_PAYMENT = 7;
+ORDER_FINISH  = 9;

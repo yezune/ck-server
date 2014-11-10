@@ -9,6 +9,7 @@ textarea:focus, input:focus{ outline: none; }
 .fixMenu:hover {background-image: url('/img/menu_hover.gif'); width:150px; min-width:150px; text-align:center; color:white; font-weight:bold; text-decoration:none;cursor: pointer;}
 .selMenu {background-image: url('/img/menu_on.gif'); width:150px; min-width:150px; text-align:center; color:white; font-weight:bold; text-decoration:none;}
 
+.menutxt {color:white; font-weight:bold; text-decoration:none;}
 .bTitle {color:#B5384D; font-weight:bold; }
 .hyper {color:#AC0648; font-weight:bold; text-decoration:none; }
 .hyper:hover {color:#CC3366; font-weight:bold; text-decoration:underline; }
@@ -16,6 +17,10 @@ textarea:focus, input:focus{ outline: none; }
 
 .iLabel {background-color:#F8F1F8; text-align: right; width: 100px; min-width:100px; height:30px; color:#666666; font-weight:bold; padding-right:5px;}
 
+.fixTable {
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 /* button */
 .greenBtn {
@@ -49,3 +54,20 @@ textarea:focus, input:focus{ outline: none; }
 	background-color: #BE600C;
 	color: #F6FF0B;
 }
+
+.greyBtn {
+	border: 1px solid;
+	border-radius: 4px;
+	cursor: pointer;
+    height: 24px;
+    min-width: 50px;
+	background-color: #999999;
+	color: #ffffff;
+	border-color: #999999 #999999 #efefef;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.greyBtn:hover {
+	background-color: #777777;
+	color: #F6FF0B;
+}
+

@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-    script(src='/js/register.js')
+    script(src='/js/local.js')
 block contents
     table(cellpadding='0', cellspacing='0')
         tr
@@ -21,7 +21,7 @@ block contents
                                             input(type='hidden', name='localID', value='0')
                                             table(cellpadding='0', cellspacing='0')
                                                 tr 
-                                                    td(height='1', bgcolor='B5384D', colspan='11')
+                                                    td(height='1', bgcolor='B5384D', colspan='8')
                                                 tr
                                                     td.iLabel 지역명
                                                     td(width='1', bgcolor='D7D8DD')
@@ -33,12 +33,11 @@ block contents
                                                     td(width='1', bgcolor='D7D8DD')
                                                     td(style="align:left; padding-left:5px;")
                                                         input(type='text', style="width:300px;border:0;", name='localDesc')
-                                                    td(width='1', bgcolor='D7D8DD')
                                                 tr 
-                                                    td(height='1', bgcolor='B5384D', colspan='9')
+                                                    td(height='1', bgcolor='B5384D', colspan='8')
                                                 tr(height='40')
                                                     td(colspan='2')
-                                                    td(colspan='7', align='left')
+                                                    td(colspan='6', align='left')
                                                         input.greenBtn(type='button', id='localSubmit', value='Add Local', onclick="submitLocal()")
                                                                         
                                                 tr 
@@ -46,7 +45,7 @@ block contents
                                     
                             table(cellpadding='0', cellspacing='0', width='100%')
                                 tr 
-                                    td(height='1', bgcolor='B5384D', colspan='16', align='left')
+                                    td(height='1', bgcolor='B5384D', colspan='10', align='left')
                                 tr(height='30', bgcolor='F8F1F8')
                                     td(width='50', class='board_head') No.
                                     td(width='1', bgcolor='D7D8DD')

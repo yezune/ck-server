@@ -1,0 +1,220 @@
+extends layout
+
+block scripts
+    script(src='/js/shop.js')
+    script(src="http://dmaps.daum.net/map_js_init/postcode.js")
+
+block contents
+    form(action='/registShop', method='post', enctype='multipart/form-data')
+        input(type='hidden', name='shopID', value='#{shopInfo.shopID}')
+        table(cellpadding='0', cellspacing='0')
+            tr
+                td(height='1', bgcolor='B5384D', colspan='11')
+            if logInfo.memLevel == 'Admin'
+                tr
+                    td.iLabel Local
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', width='200')
+                        select(name='localID')
+                            each local in localList 
+                                if local.localID == shopInfo.localID
+                                    option(value='#{local.localID}', selected) #{local.localName}
+                                else
+                                    option(value='#{local.localID}') #{local.localName}
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='1', bgcolor='FFFFFF')
+                    td.iLabel 카테고리
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', width='200')
+                        select(name='shopCate')
+                            each cate in cateList 
+                                if cate.shopCate == shopInfo.shopCate
+                                    option(value='#{cate.shopCate}', selected) #{cate.cateName}
+                                else
+                                    option(value='#{cate.shopCate}') #{cate.cateName}
+                    td(width='1', bgcolor='D7D8DD')
+                tr 
+                    td(height='1', bgcolor='D7D8DD', colspan='11')
+                
+                tr
+                    td.iLabel 배달여부
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', colspan='7')
+                        table
+                            tr
+                                td
+                                    if shopInfo.delivery == 0
+                                        | <input type='radio' name='delivery' value='0' checked> 배달의뢰
+                                    else
+                                        | <input type='radio' name='delivery' value='0'> 배달의뢰
+                                td(width='10')
+                                td
+                                    if shopInfo.delivery == 0
+                                        | <input type='radio' name='delivery' value='1' > 직접배달
+                                    else
+                                        | <input type='radio' name='delivery' value='1' checked> 직접배달
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+
+            tr
+                td.iLabel 가맹점 이름
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='shopName', value='#{shopInfo.shopName}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel 대표자
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='master', value='#{shopInfo.master}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr
+                td.iLabel 대표전화
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='telNumber', value='#{shopInfo.telNumber}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel 핸드폰
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='mobile', value='#{shopInfo.mobile}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr 
+                td.iLabel 주소
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    table
+                        tr
+                            td
+                                input.greyBtn(type='button', value='주소검색', onclick="showDaumPostcode();")
+                            td
+                                input(type='text', style="width:400px;border:0;", name='address1', id='address1', value='#{shopInfo.address1}', readOnly)
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr 
+                td.iLabel 나머지 주소
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='text', style="width:400px;border:0;", name='address2', id='address2', value='#{shopInfo.address2}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr
+                td.iLabel 최소주문금액
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:100px;border:0;", name='minPrice', value='#{shopInfo.minPrice}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel 주요메뉴
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:250px;border:0;", name='primeMenu', value='#{shopInfo.primeMenu}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr
+                td.iLabel Open Time
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='startTime', value='#{shopInfo.startTime}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel Close Time
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:250px;border:0;", name='endTime', value='#{shopInfo.endTime}')
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr
+                td.iLabel 로그인 ID
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='logID', value='#{shopInfo.logID}')
+                td(width='1', bgcolor='D7D8DD')
+                td(width='1', bgcolor='FFFFFF')
+                td.iLabel 로그인 PW
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left')
+                    input(type='text', style="width:200px;border:0;", name='logPW')
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr 
+                td.iLabel 결제 은행계좌
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='text', style="width:400px;border:0;", name='bankInfo', value='#{shopInfo.bankInfo}')
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr 
+                td.iLabel 지역화폐 계좌
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='text', style="width:400px;border:0;", name='localBank', value='#{shopInfo.localBank}')
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr 
+                td.iLabel 가맹점 설명
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    textarea(style="width:550px;height:100px;border:0;", name='Descript') !{shopInfo.Descript}
+                td(width='1', bgcolor='D7D8DD')
+            tr
+                td(height='1', bgcolor='D7D8DD', colspan='11')
+            if shopInfo.shopImage
+                tr 
+                    td.iLabel 등록된 이미지
+                    td(width='1', bgcolor='D7D8DD')
+                    td(width='5', bgcolor='FFFFFF')
+                    td(align='left', colspan='7')
+                        img(src="#{shopInfo.shopImage}", border=0)
+                    td(width='1', bgcolor='D7D8DD')
+                tr
+                    td(height='1', bgcolor='D7D8DD', colspan='11')
+            tr 
+                td.iLabel 대표 이미지
+                td(width='1', bgcolor='D7D8DD')
+                td(width='5', bgcolor='FFFFFF')
+                td(align='left', colspan='7')
+                    input(type='file' name='upfile', style="width:500px;")
+                td(width='1', bgcolor='D7D8DD')
+            tr 
+                td(height='1', bgcolor='B5384D', colspan='11')
+            tr(height='40')
+                td(colspan='11', align='center')
+                    input.greenBtn(type='submit', value='#{btnText}')
+
+    div(id="postLayer", style="display:none;border:5px solid;position:fixed;width:500px;height:600px;left:50%;margin-left:-250px;top:50%;margin-top:-300px;overflow:hidden;-webkit-overflow-scrolling:touch;")
+        img(src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png", style="cursor:pointer;position:absolute;right:-3px;top:-3px", onclick="closeDaumPostcode()")
+
+                                
+
