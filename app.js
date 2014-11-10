@@ -66,6 +66,8 @@ app.post('/registMenu', action.registMenu);
 // REST API
 app.get('/api/localList', restAPI.localList);
 app.post('/api/localList', restAPI.localList);
+app.get('/api/shopCate', restAPI.shopCate);
+app.post('/api/shopCate', restAPI.shopCate);
 
 
 
