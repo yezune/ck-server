@@ -165,6 +165,58 @@ exports.deliverInfo = function(req, res) {
     });
 };
 
+exports.shopList = function(req, res) {
+	setPage(req, 'shopList' );
+    var localID = req.body.localID;
+    var shopCate = req.body.shopCate;
+    var shopName = req.body.shopName;
+    
+    var query = "select * from TB_SHOP where localID="+localID;
+    if(shopCate > 0) {
+        query += " and shopCate="+shopCate;
+    }
+    if(shopName && shopName.length>1) {
+        query += " and shopName like '%"+shopName+"%'";
+    }
+    db.executeQuery(query,  function( err, result ) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        var retJson = {shopID:0, error:err};
+        if(err) {
+            res.write(JSON.stringify(retJson));
+        } else {
+            if(result.length == 0) {
+                retJson.error = 'Nothing shop';
+                res.write(JSON.stringify(retJson));
+            } else {
+                res.write(JSON.stringify(result));
+            }
+        }
+        res.end();
+    });
+};
+
+exports.menuList = function(req, res) {
+	setPage(req, 'menuList' );
+    var shopID = req.body.shopID;
+    
+    var query = "select * from TB_MENU where shopID="+shopID;
+    db.executeQuery(query,  function( err, result ) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        var retJson = {menuID:0, error:err};
+        if(err) {
+            res.write(JSON.stringify(retJson));
+        } else {
+            if(result.length == 0) {
+                retJson.error = 'Nothing menu';
+                res.write(JSON.stringify(retJson));
+            } else {
+                res.write(JSON.stringify(result));
+            }
+        }
+        res.end();
+    });
+};
+
 
 
 

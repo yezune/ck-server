@@ -72,6 +72,8 @@ app.post('/api/joinMem', restAPI.joinMem);
 app.post('/api/memInfo', restAPI.memInfo);
 app.post('/api/joinDeliver', restAPI.joinDeliver);
 app.post('/api/deliverInfo', restAPI.deliverInfo);
+app.post('/api/shopList', restAPI.shopList);
+app.post('/api/menuList', restAPI.menuList);
 
 
 
