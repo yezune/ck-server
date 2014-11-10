@@ -68,6 +68,11 @@ app.get('/api/localList', restAPI.localList);
 app.post('/api/localList', restAPI.localList);
 app.get('/api/shopCate', restAPI.shopCate);
 app.post('/api/shopCate', restAPI.shopCate);
+app.post('/api/joinMem', restAPI.joinMem);
+app.post('/api/memInfo', restAPI.memInfo);
+app.post('/api/joinDeliver', restAPI.joinDeliver);
+app.post('/api/deliverInfo', restAPI.deliverInfo);
+
 
 
 
