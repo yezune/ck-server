@@ -30,7 +30,7 @@ exports.orderList = function(req, res) {
     var incWhere = false;
     if(logInfo.memLevel == 'Admin') {
         query = "select O.*, date_format(O.RegDate, '%m/%d %H:%i:%s') orderTime, (select shopName from TB_SHOP where shopID=O.shopID) shopName";
-        query += ", (select memName from TB_MEMBER where memberID=O.memberID) memName";
+        query += ", (select memName from TB_MEMBER where uniqueKey=O.memberKey) memName";
         query += ", (select Group_Concat(CONCAT(menuName,'(',Count,')')) from TB_ORDER_MENU where orderID=O.orderID) orderMenu";
         query += " from TB_ORDER O";
         if(shopID) {
@@ -39,7 +39,7 @@ exports.orderList = function(req, res) {
         }
     } else {
         query = "select O.*, date_format(O.RegDate, '%m/%d %H:%i:%s') orderTime, (select shopName from TB_SHOP where shopID=O.shopID) shopName";
-        query += ", (select memName from TB_MEMBER where memberID=O.memberID) memName";
+        query += ", (select memName from TB_MEMBER where uniqueKey=O.memberKey) memName";
         query += ", (select Group_Concat(CONCAT(menuName,'(',Count,')')) from TB_ORDER_MENU where orderID=O.orderID) orderMenu";
         query += " from TB_ORDER O where O.shopID="+logInfo.shopID;
         incWhere = true;

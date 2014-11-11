@@ -74,6 +74,7 @@ app.post('/api/joinDeliver', restAPI.joinDeliver);
 app.post('/api/deliverInfo', restAPI.deliverInfo);
 app.post('/api/shopList', restAPI.shopList);
 app.post('/api/menuList', restAPI.menuList);
+app.post('/api/order', restAPI.order);
 
 
 

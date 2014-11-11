@@ -170,6 +170,7 @@ exports.shopList = function(req, res) {
     var localID = req.body.localID;
     var shopCate = req.body.shopCate;
     var shopName = req.body.shopName;
+	var shopID = req.body.shopID;
     
     var query = "select * from TB_SHOP where localID="+localID;
     if(shopCate > 0) {
@@ -178,6 +179,9 @@ exports.shopList = function(req, res) {
     if(shopName && shopName.length>1) {
         query += " and shopName like '%"+shopName+"%'";
     }
+	if(shopID) {
+		query = "select * from TB_SHOP where shopID="+shopID;
+	}
     db.executeQuery(query,  function( err, result ) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         var retJson = {shopID:0, error:err};
@@ -217,6 +221,67 @@ exports.menuList = function(req, res) {
     });
 };
 
+exports.order = function(req, res) {
+	setPage(req, 'order' );
+    var memberKey = req.body.memberKey;
+    var shopID = req.body.shopID;
+    var payType = req.body.payType;
+    var address = req.body.address;
+    var orderPrice = req.body.orderPrice;
+    var Descript = req.body.Descript;
+    var orderMenu = req.body.orderMenu;
+	
+	Descript = Descript.replace(/'/gi, "`");
+
+	var query = "insert into TB_ORDER (shopID, memberKey, payType, address, orderPrice, Descript) values (";
+	query += shopID;
+	query += ", '"+memberKey+"'";
+	query += ", '"+payType+"'";
+	query += ", '"+address+"'";
+	query += ", '"+orderPrice+"'";
+	query += ", '"+Descript+"')";
+	db.executeQuery(query,  function( err, result ) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+		var retJson = {ResultCode:'fail'};
+		if(err) {
+			retJson.error = err;
+			res.write(JSON.stringify(retJson));
+			res.end();
+			return;
+		}
+		query = "select orderID from TB_ORDER where shopID="+shopID+" and memberKey='"+memberKey+"'";
+		db.executeQuery(query,  function( err, orderList ) {
+			if(err) {
+				retJson.error = err;
+				res.write(JSON.stringify(retJson));
+				res.end();
+				return;
+			} else if(orderList.length < 1) {
+				retJson.error = 'insert failed';
+				res.write(JSON.stringify(retJson));
+				res.end();
+				return;
+			}
+			var orderID = orderList[0].orderID;
+			var orderArray = orderMenu.split(',');
+			for(i=0;i<orderArray.length;i++) {
+				var orderItem = orderArray[i].spit(':');
+				query = "insert into TB_ORDER (orderID, menuName, Count, Price) values (";
+				query += orderID;
+				query += ", '"+orderItem[0]+"'";
+				query += ", '"+orderItem[1]+"'";
+				query += ", '"+orderItem[2]+"')";
+				db.executeQuery(query,  function( err, result ) {
+				
+				});				
+			}
+			retJson.ResultCode = 'ok';
+			res.write(JSON.stringify(retJson));
+			res.end();
+		});
+		
+	});
+};
 
 
 
