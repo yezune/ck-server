@@ -57,12 +57,12 @@ exports.joinMem = function(req, res) {
         } else {
             if(result.length == 0) {
                 query = "insert into TB_MEMBER (memName, regKey, uniqueKey, mobile, address1, address2) values (";
-                qeury += "'"+memName+"'";
-                qeury += ", '"+regKey+"'";
-                qeury += ", '"+uniqueKey+"'";
-                qeury += ", '"+mobile+"'";
-                qeury += ", '"+address1+"'";
-                qeury += ", '"+address2+"')";
+                query += "'"+memName+"'";
+                query += ", '"+regKey+"'";
+                query += ", '"+uniqueKey+"'";
+                query += ", '"+mobile+"'";
+                query += ", '"+address1+"'";
+                query += ", '"+address2+"')";
                 db.executeQuery(query,  function( err, result ) {
                     if(err) {
                         retJson.error = err;
@@ -121,10 +121,10 @@ exports.joinDeliver = function(req, res) {
         } else {
             if(result.length == 0) {
                 query = "insert into TB_DELIVER (deliverName, localID, uniqueKey, mobile) values (";
-                qeury += "'"+deliverName+"'";
-                qeury += ", "+localID;
-                qeury += ", '"+uniqueKey+"'";
-                qeury += ", '"+mobile+"')";
+                query += "'"+deliverName+"'";
+                query += ", "+localID;
+                query += ", '"+uniqueKey+"'";
+                query += ", '"+mobile+"')";
                 db.executeQuery(query,  function( err, result ) {
                     if(err) {
                         retJson.error = err;
