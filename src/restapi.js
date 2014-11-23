@@ -168,14 +168,16 @@ exports.deliverInfo = function(req, res) {
         if(err) {
             retJson.error = err;
             res.write(JSON.stringify(retJson));
+			res.end();
         } else {
             if(result.length == 0) {
                 res.write(JSON.stringify(retJson));
+				res.end();
             } else {
                 res.write(JSON.stringify(result));
+				res.end();
             }
-        }
-        res.end();
+        }        
     });
 };
 
@@ -201,15 +203,18 @@ exports.shopList = function(req, res) {
         var retJson = {shopID:0, error:err};
         if(err) {
             res.write(JSON.stringify(retJson));
+			res.end();
         } else {
             if(result.length == 0) {
                 retJson.error = 'Nothing shop';
                 res.write(JSON.stringify(retJson));
+				res.end();
             } else {
                 res.write(JSON.stringify(result));
+				res.end();
             }
         }
-        res.end();
+        
     });
 };
 
@@ -223,15 +228,18 @@ exports.menuList = function(req, res) {
         var retJson = {menuID:0, error:err};
         if(err) {
             res.write(JSON.stringify(retJson));
+			res.end();
         } else {
             if(result.length == 0) {
                 retJson.error = 'Nothing menu';
                 res.write(JSON.stringify(retJson));
+				res.end();
             } else {
                 res.write(JSON.stringify(result));
+				res.end();
             }
         }
-        res.end();
+        
     });
 };
 
