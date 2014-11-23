@@ -45,11 +45,22 @@ exports.joinMem = function(req, res) {
     var mobile = req.body.mobile;
     var address1 = req.body.address1;
     var address2 = req.body.address2;
+	
+	res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+	var retJson = {ResultCode:'fail'};
+	if(!uniqueKey) {
+		retJson.error = 'Nothing parameter : uniqueKey';
+		res.write(JSON.stringify(retJson));
+		res.end(); return;		
+	}
+	if(!memName) {
+		retJson.error = 'Nothing parameter : memName';
+		res.write(JSON.stringify(retJson));
+		res.end(); return;		
+	}
     
     var query = "select * from TB_MEMBER where uniqueKey='"+uniqueKey+"'";
     db.executeQuery(query,  function( err, result ) {
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        var retJson = {ResultCode:'fail'};
         if(err) {
             retJson.error = err;
             res.write(JSON.stringify(retJson));
@@ -97,6 +108,7 @@ exports.memInfo = function(req, res) {
                 res.write(JSON.stringify(retJson));
             } else {
                 res.write(JSON.stringify(result));
+				console.log(result);
             }
         }
         res.end();
