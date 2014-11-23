@@ -103,15 +103,17 @@ exports.memInfo = function(req, res) {
         if(err) {
             retJson.error = err;
             res.write(JSON.stringify(retJson));
+			res.end();
         } else {
             if(result.length == 0) {
                 res.write(JSON.stringify(retJson));
+				res.end();
             } else {
                 res.write(JSON.stringify(result));
 				console.log(result);
+				res.end();
             }
-        }
-        res.end();
+        }        
     });
 };
 
