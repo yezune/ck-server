@@ -110,7 +110,6 @@ exports.memInfo = function(req, res) {
 				res.end();
             } else {
                 res.write(JSON.stringify(result));
-				console.log(result);
 				res.end();
             }
         }        
@@ -200,8 +199,9 @@ exports.shopList = function(req, res) {
 	}
     db.executeQuery(query,  function( err, result ) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        var retJson = {shopID:0, error:err};
+        var retJson = {shopID:0};
         if(err) {
+			retJson.error = err;
             res.write(JSON.stringify(retJson));
 			res.end();
         } else {
