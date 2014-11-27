@@ -321,7 +321,9 @@ exports.registShop = function(req, res) {
                 var shopImage = result[0].shopImage;
                 if(!shopImage || shopImage=='') {
                     var curDate = new Date();
-                    var mkFilename = 'shop_'+curDate.getTime();
+					var nameArray = req.files.upfile.name.split('.');
+					var mkFilename = 'shop_'+curDate.getTime()+"."+ nameArray[nameArray.length-1];
+					
                     newPath = global.uploadPath + '/'+mkFilename;
                     imgUrl = global.uploadDir + '/'+mkFilename;
                 } else {
@@ -350,7 +352,8 @@ exports.registShop = function(req, res) {
         }
         if(req.files.upfile.size > 0) {
             var curDate = new Date();
-            var mkFilename = 'shop_'+curDate.getTime();
+			var nameArray = req.files.upfile.name.split('.');
+			var mkFilename = 'shop_'+curDate.getTime()+"."+ nameArray[nameArray.length-1];
             newPath = global.uploadPath + '/'+mkFilename;
             imgUrl =  global.uploadDir + '/'+mkFilename;
             fs.readFile(req.files.upfile.path, function(error, data) {
@@ -671,7 +674,8 @@ exports.registMenu = function(req, res) {
                 var menuImage = result[0].menuImage;
                 if(!menuImage || menuImage=='') {
                     var curDate = new Date();
-                    var mkFilename = 'menu_'+curDate.getTime();
+					var nameArray = req.files.upfile.name.split('.');
+					var mkFilename = 'menu_'+curDate.getTime()+"."+ nameArray[nameArray.length-1];
                     newPath = global.uploadPath + '/'+mkFilename;
                     imgUrl = global.uploadDir + '/'+mkFilename;
                 } else {
@@ -700,7 +704,8 @@ exports.registMenu = function(req, res) {
         }
         if(req.files.upfile.size > 0) {
             var curDate = new Date();
-            var mkFilename = 'menu_'+curDate.getTime();
+			var nameArray = req.files.upfile.name.split('.');
+			var mkFilename = 'menu_'+curDate.getTime()+"."+ nameArray[nameArray.length-1];
             newPath = global.uploadPath + '/'+mkFilename;
             imgUrl =  global.uploadDir + '/'+mkFilename;
             fs.readFile(req.files.upfile.path, function(error, data) {
