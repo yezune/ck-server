@@ -253,7 +253,7 @@ exports.order = function(req, res) {
     var Descript = req.body.Descript;
     var orderMenu = req.body.orderMenu;
 	
-	Descript = Descript.replace(/'/gi, "`");
+	if(Descript) Descript = Descript.replace(/'/gi, "`");
 
 	var query = "insert into TB_ORDER (shopID, memberKey, payType, address, orderPrice, Descript) values (";
 	query += shopID;
