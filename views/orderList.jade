@@ -64,10 +64,10 @@ block contents
                     td(align='center') #{result.memName}
                     td(colspan='2')
                     td
-						if result.orderMenu
-							- var orderArray = result.orderMenu.split(',');
-							each order in orderArray
-								| #{order} <br>
+                        if result.orderMenu
+                            - var orderArray = result.orderMenu.split(',');
+                            each order in orderArray
+                                | #{order} <br>
                     td(colspan='2')
                     td #{result.address}
                     td(colspan='2')
