@@ -288,14 +288,14 @@ exports.order = function(req, res) {
 			var orderArray = orderMenu.split(',');
 			for(i=0;i<orderArray.length;i++) {
 				var orderItem = orderArray[i].split(':');
-				query = "insert into TB_ORDER (orderID, menuName, Count, Price) values (";
+				query = "insert into TB_ORDER_MENU (orderID, menuName, Count, Price) values (";
 				query += orderID;
 				query += ", '"+orderItem[0]+"'";
 				query += ", '"+orderItem[1]+"'";
 				query += ", '"+orderItem[2]+"')";
 				db.executeQuery(query,  function( err, result ) {
 				
-				});				
+				});
 			}
 			retJson.ResultCode = 'ok';
 			res.write(JSON.stringify(retJson));
