@@ -255,6 +255,18 @@ exports.order = function(req, res) {
 	
 	if(Descript) Descript = Descript.replace(/'/gi, "`");
 
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    var retJson = {ResultCode:'fail'};
+    if(!memberKey) {
+        retJson.error = 'memberKey is null';
+        res.write(JSON.stringify(retJson));
+        res.end(); return;
+    }
+    if(!shopID) {
+        retJson.error = 'shopID is null';
+        res.write(JSON.stringify(retJson));
+        res.end(); return;
+    }
 	var query = "insert into TB_ORDER (shopID, memberKey, payType, address, orderPrice, Descript) values (";
 	query += shopID;
 	query += ", '"+memberKey+"'";
@@ -263,8 +275,6 @@ exports.order = function(req, res) {
 	query += ", '"+orderPrice+"'";
 	query += ", '"+Descript+"')";
 	db.executeQuery(query,  function( err, result ) {
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-		var retJson = {ResultCode:'fail'};
 		if(err) {
 			retJson.error = err;
 			res.write(JSON.stringify(retJson));
@@ -307,12 +317,12 @@ exports.order = function(req, res) {
 
 exports.myOrder = function(req, res) {
 	setPage(req, 'myOrder' );
-    var uniqueKey = req.body.uniqueKey;
+    var memberKey = req.body.memberKey;
     
     query = "select O.*, date_format(O.RegDate, '%Y/%m/%d %H:%i:%s') orderTime, (select shopName from TB_SHOP where shopID=O.shopID) shopName";
     query += ", (select deliverName from TB_DELIVER where O.deliverKey is not null and uniqueKey=O.deliverKey) deliverName";
     query += ", (select Group_Concat(CONCAT(menuName,'(',Count,')')) from TB_ORDER_MENU where orderID=O.orderID) orderMenu";
-    query += " from TB_ORDER O where O.memberKey='"+uniqueKey;
+    query += " from TB_ORDER O where O.memberKey='"+memberKey;
     query += "' order by O.RegDate desc";
     db.executeQuery(query,  function( err, orderList ) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
