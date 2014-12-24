@@ -267,6 +267,11 @@ exports.order = function(req, res) {
         res.write(JSON.stringify(retJson));
         res.end(); return;
     }
+    if(!orderMenu) {
+        retJson.error = 'orderMenu is null';
+        res.write(JSON.stringify(retJson));
+        res.end(); return;
+    }
 	var query = "insert into TB_ORDER (shopID, memberKey, payType, address, orderPrice, Descript) values (";
 	query += shopID;
 	query += ", '"+memberKey+"'";
