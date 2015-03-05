@@ -324,7 +324,7 @@ exports.myOrder = function(req, res) {
 	setPage(req, 'myOrder' );
     var memberKey = req.body.memberKey;
     
-    query = "select O.*, date_format(O.RegDate, '%Y/%m/%d %H:%i:%s') orderTime, (select shopName from TB_SHOP where shopID=O.shopID) shopName";
+    var query = "select O.*, date_format(O.RegDate, '%Y/%m/%d %H:%i:%s') orderTime, (select shopName from TB_SHOP where shopID=O.shopID) shopName";
     query += ", (select deliverName from TB_DELIVER where O.deliverKey is not null and uniqueKey=O.deliverKey) deliverName";
     query += ", (select Group_Concat(CONCAT(menuName,'(',Count,')')) from TB_ORDER_MENU where orderID=O.orderID) orderMenu";
     query += " from TB_ORDER O where O.memberKey='"+memberKey;
